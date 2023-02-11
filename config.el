@@ -62,9 +62,101 @@
   (setq org-agenda-files
         '("~/Dropbox/gtd/" "~/Dropbox/org/")))
 
+(setq
+ org-return-follows-link t
+ org-deadline-warning-days 30)
+
+;; seperator for agenda view
+(setq org-agenda-block-separator 8411)
+
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
+        (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)")))
+
+(setq org-capture-templates
+      '(("t" "Todo" entry (file "~/Dropbox/org/inbox.org")
+         "* TODO %?\n  %i\n  %a")))
+
+(setq org-fancy-priorities-list '("⚡" "⬆" "⬇" "☕"))
+
+;; better org agenda view with sorted prios
+(setq org-agenda-custom-commands
+      '(("c" "A better agenda view"
+         ((tags-todo "PRIORITY=\"A\""
+                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                 (org-agenda-overriding-header "High prio unfinished tasks:")))
+          (tags-todo "PRIORITY=\"B\""
+                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                 (org-agenda-overriding-header "Mid prio unfinished tasks:")))
+          (tags-todo "PRIORITY=\"C\""
+                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                 (org-agenda-overriding-header "Low prio unfinished tasks:")))
+          (tags-todo "PRIORITY=\"D\""
+                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo 'done))
+                 (org-agenda-overriding-header "Somday unfinished tasks:")))
+          (agenda "")
+          (alltodo "")))))
+
+(setq org-agenda-custom-commands
+      '(("v" "Agenda"
+         ((agenda ""
+                  ((org-agenda-span 'day)))
+          (todo "TODO"
+                ((org-agenda-overriding-header "Unscheduled  tasks")
+                 (org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled 'deadline))))))))
+
+(global-set-key (kbd "C-c c") #'org-capture)
+(global-set-key (kbd "C-c a") #'org-agenda)
+
+(setq org-agenda-start-day nil) ;set startday today
+;; super agenda
+(setq org-super-agenda-groups
+       '(;; Each group has an implicit boolean OR operator between its selectors.
+         (:name "Today"  ; Optionally specify section name
+                :time-grid t  ; Items that appear on the time grid
+                :todo "TODAY")  ; Items that have this TODO keyword
+         (:name "Important"
+                ;; Single arguments given alone
+                :tag "bills"
+                :priority "A")
+         ;; Set order of multiple groups at once
+         (:order-multi (2 (:name "Shopping in town"
+                                 ;; Boolean AND group matches items that match all subgroups
+                                 :and (:tag "shopping" :tag "@town"))
+                          (:name "Food-related"
+                                 ;; Multiple args given in list with implicit OR
+                                 :tag ("food" "dinner"))
+                          (:name "Personal"
+                                 :habit t
+                                 :tag "personal")
+                          (:name "Space-related (non-moon-or-planet-related)"
+                                 ;; Regexps match case-insensitively on the entire entry
+                                 :and (:regexp ("space" "NASA")
+                                               ;; Boolean NOT also has implicit OR between selectors
+                                               :not (:regexp "moon" :tag "planet")))))
+         ;; Groups supply their own section names when none are given
+         (:todo "WAITING" :order 8)  ; Set order of this section
+         (:todo ("SOMEDAY" "TO-READ" "CHECK" "TO-WATCH" "WATCHING")
+                ;; Show this group at the end of the agenda (since it has the
+                ;; highest number). If you specified this group last, items
+                ;; with these todo keywords that e.g. have priority A would be
+                ;; displayed in that group instead, because items are grouped
+                ;; out in the order the groups are listed.
+                :order 9)
+         (:priority<= "B"
+                      ;; Show this section after "Today" and "Important", because
+                      ;; their order is unspecified, defaulting to 0. Sections
+                      ;; are displayed lowest-number-first.
+                      :order 1)
+         ;; After the last group, the agenda will display items that didn't
+         ;; match any of these groups, with the default order position of 99
+         ))
+;;  (org-agenda nil "a")
+
 ;; set transparency
-(set-frame-parameter nil 'alpha-background 100) ; For current frame
-(add-to-list 'default-frame-alist '(alpha-background . 100)) ; For all new frames henceforth
+;;(doom/set-frame-opacity 90)
+(set-frame-parameter nil 'alpha-background 50) ; For current frame
+(add-to-list 'default-frame-alist '(alpha-background . 50)) ; For all new frames henceforth
 
 (defun kb/toggle-window-transparency ()
   "Toggle transparency."

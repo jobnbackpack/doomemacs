@@ -6,11 +6,17 @@
 ;; use 'M-x doom/reload'.
 
 ;;to show whats behind org link etc
-(package! org-appear
+;;(package! org-appear
+;;  :recipe (:host github
+;;           :repo "awth13/org-appear"))
+
+;;super agenda
+(package! org-super-agenda
   :recipe (:host github
-           :repo "awth13/org-appear"))
+                 :repo "alphapapa/org-super-agenda"))
 
-
+;; for more beautiful prios
+(package! org-fancy-priorities)
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
