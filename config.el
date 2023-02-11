@@ -40,12 +40,39 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/Library/Mobile Documents/iCloud~com~appsonthemove~beorg/Documents/org/")
+(setq org-directory "~/Dropbox/org/")
 
-;; Fonts
-;;(setq doom-font (font-spec :family "FiraCode Nerd Font" :size 18)
-      ;;doom-variable-pitch-font (font-spec :family "ETBembo" :size 18)
- ;;     doom-variable-pitch-font (font-spec :family "Alegreya" :size 18))
+;; Maximise on startup
+(setq initial-frame-alist '((top . 1) (left . 1) (width . 114) (height . 32)))
+
+;; Word Count when available
+(setq doom-modeline-enable-word-count t)
+
+;; disable lsp in org files
+(defun zz/adjust-org-company-backends ()
+  (remove-hook 'after-change-major-mode-hook '+company-init-backends-h)
+  (setq-local company-backends nil))
+(add-hook! org-mode (zz/adjust-org-company-backends))
+
+;; show emphasis markers when over links etc.
+(add-hook! org-mode :append #'org-appear-mode)
+
+;; capturing note taking
+(after! org
+  (setq org-agenda-files
+        '("~/Dropbox/gtd/" "~/Dropbox/org/")))
+
+;; set transparency
+(set-frame-parameter nil 'alpha-background 100) ; For current frame
+(add-to-list 'default-frame-alist '(alpha-background . 100)) ; For all new frames henceforth
+
+(defun kb/toggle-window-transparency ()
+  "Toggle transparency."
+  (interactive)
+  (let ((alpha-transparency 75))
+    (pcase (frame-parameter nil 'alpha-background)
+      (alpha-transparency (set-frame-parameter nil 'alpha-background 100))
+      (t (set-frame-parameter nil 'alpha-background alpha-transparency)))))
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
