@@ -6,8 +6,8 @@
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
-(setq user-full-name "John Doe"
-      user-mail-address "john@doe.com")
+(setq user-full-name "Robin Janzen"
+      user-mail-address "rjanzen.11six@gmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
@@ -21,7 +21,7 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-(setq doom-font (font-spec :family "FiraCode Nerd Font" :size 16 :weight 'semi-light)
+(setq doom-font (font-spec :family "Fira Code" :size 16 :weight 'semi-light)
       doom-variable-pitch-font (font-spec :family "Fira Code" :size 16))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
@@ -43,7 +43,7 @@
 (setq org-directory "~/Dropbox/org/")
 
 ;; Maximise on startup
-(setq initial-frame-alist '((top . 1) (left . 1) (width . 114) (height . 32)))
+;;(setq initial-frame-alist '((top . 1) (left . 1) (width . 114) (height . 32)))
 
 ;; Word Count when available
 (setq doom-modeline-enable-word-count t)
@@ -75,12 +75,14 @@
   (setq org-agenda-files
         '("~/Dropbox/gtd/" "~/Dropbox/org/")))
 
+(setq org-agenda-start-day nil) ;set startday today
+
 (setq
  org-return-follows-link t
  org-deadline-warning-days 30)
 
 ;; seperator for agenda view
-(setq org-agenda-block-separator 8411)
+(setq org-agenda-block-separator 61)
 
 (setq org-todo-keywords
       '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
@@ -121,7 +123,6 @@
 (global-set-key (kbd "C-c c") #'org-capture)
 (global-set-key (kbd "C-c a") #'org-agenda)
 
-(setq org-agenda-start-day nil) ;set startday today
 ;; super agenda
 (setq org-super-agenda-groups
        '(;; Each group has an implicit boolean OR operator between its selectors.
