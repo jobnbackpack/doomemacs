@@ -11,12 +11,13 @@
 ;;           :repo "awth13/org-appear"))
 
 ;;super agenda
-(package! org-super-agenda
-  :recipe (:host github
-                 :repo "alphapapa/org-super-agenda"))
+(package! org-super-agenda)
 
 ;; for more beautiful prios
 (package! org-fancy-priorities)
+
+;; org roam
+(package! org-roam)
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)

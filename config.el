@@ -54,9 +54,22 @@
   (setq-local company-backends nil))
 (add-hook! org-mode (zz/adjust-org-company-backends))
 
-;; show emphasis markers when over links etc.
-(add-hook! org-mode :append #'org-appear-mode)
+;;------------------
+;;    ORG ROAM
+;;------------------
+(after! org
+  (setq
+   org-roam-directory "~/Dropbox/RoamNotes"
+   )
+)
+(global-set-key (kbd "C-c n l") #'org-roam-buffer-toggle)
+(global-set-key (kbd "C-c n f") #'org-roam-node-find)
+(global-set-key (kbd "C-c n i") #'org-roam-node-insert)
 
+
+;;------------------
+;;   ORG AGENDA
+;;------------------
 ;; capturing note taking
 (after! org
   (setq org-agenda-files
