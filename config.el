@@ -73,7 +73,7 @@
 ;; capturing note taking
 (after! org
   (setq org-agenda-files
-        '("~/Dropbox/gtd/" "~/Dropbox/org/")))
+        '("~/Dropbox/RoamNotes/" "~/Dropbox/org/")))
 
 (setq org-agenda-start-day nil) ;set startday today
 
