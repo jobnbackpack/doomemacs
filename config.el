@@ -66,6 +66,7 @@
   (setq
    org-roam-directory "~/Dropbox/RoamNotes"
    )
+  (setq org-roam-dailies-directory "journal/")
   (setq
    org-roam-completion-everywhere t)
   (setq org-roam-capture-templates
@@ -78,6 +79,14 @@
            :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+FILETAGS: :input:\n#+started: %U\n")
            :unnarrowed t)
           ))
+  ;; (setq org-roam-dailies-capture-templates
+  ;;       '(("d" "default" plain
+  ;;          (file "~/Dropbox/RoamNotes/Templates/DailyTemplate.org")
+  ;;          :if-new (file+head "%<%Y-%m-%d>.org"
+  ;;                             "#+title: %<%Y-%m-%d>\n#+filetags: %<:%Y:%B:>\n")
+  ;;          :unnarrowed t)
+  ;;          ))
+  (add-hook! org-mode (org-roam-dblocks-autoupdate-mode))
   )
 (global-set-key (kbd "C-c n l") #'org-roam-buffer-toggle)
 (global-set-key (kbd "C-c n f") #'org-roam-node-find)

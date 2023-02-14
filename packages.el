@@ -16,11 +16,8 @@
 ;; for more beautiful prios
 (package! org-fancy-priorities)
 
-;; org roam
-;; (package! org-roam)
-
-;; org ql
-(package! org-ql)
+;;org roam db search
+(package! org-roam-dblocks :recipe (:host github :repo "chrisbarrett/nursery"))
 
 ;; org bullets
 ;; (package! org-bullets)
