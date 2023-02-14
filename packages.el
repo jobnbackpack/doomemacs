@@ -17,7 +17,13 @@
 (package! org-fancy-priorities)
 
 ;; org roam
-(package! org-roam)
+;; (package! org-roam)
+
+;; org ql
+(package! org-ql)
+
+;; org bullets
+;; (package! org-bullets)
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)

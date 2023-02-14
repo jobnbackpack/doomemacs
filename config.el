@@ -54,6 +54,11 @@
   (setq-local company-backends nil))
 (add-hook! org-mode (zz/adjust-org-company-backends))
 
+(setq org-hide-emphasis-markers t)
+
+;; (after! org-mode-hook
+;;   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+
 ;;------------------
 ;;    ORG ROAM
 ;;------------------
@@ -61,10 +66,24 @@
   (setq
    org-roam-directory "~/Dropbox/RoamNotes"
    )
-)
+  (setq
+   org-roam-completion-everywhere t)
+  (setq org-roam-capture-templates
+        '(("d" "default" plain
+           "%?"
+           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+           :unnarrowed t)
+          ("i" "input" plain
+           (file "~/Dropbox/RoamNotes/Templates/InputTemplate.org")
+           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+FILETAGS: :input:\n#+started: %U\n")
+           :unnarrowed t)
+          ))
+  )
 (global-set-key (kbd "C-c n l") #'org-roam-buffer-toggle)
 (global-set-key (kbd "C-c n f") #'org-roam-node-find)
 (global-set-key (kbd "C-c n i") #'org-roam-node-insert)
+(global-set-key (kbd "C-c n c") #'org-roam-capture)
+(global-set-key (kbd "C-c n I") #'completion-at-point)
 
 
 ;;------------------
